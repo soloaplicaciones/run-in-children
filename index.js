@@ -9,7 +9,7 @@ export function normalizeBasePath(input) {
   const absolute = path.isAbsolute(expanded) ? path.resolve(expanded) : path.resolve(process.cwd(), expanded);
 
   if (!existsSync(absolute)) {
-    throw new Error(`La carpeta base no existe: ${input}`);
+    throw new Error(`Base directory does not exist: ${input}`);
   }
 
   const statsPath = realpathSync(absolute);
@@ -90,7 +90,7 @@ export function resolveShell(shell) {
 
 export async function runInChildren(input) {
   if (input.command.trim().length === 0) {
-    throw new Error("El comando es obligatorio");
+    throw new Error("Command is required");
   }
 
   const basePath = normalizeBasePath(input.basePath);
@@ -152,7 +152,7 @@ async function executeInChild(input) {
       }
       settled = true;
       childProcess.kill();
-      reject(new Error(`Tiempo de espera agotado para ${input.child.name}`));
+      reject(new Error(`Timed out while running in ${input.child.name}`));
     }, input.timeoutMs);
 
     childProcess.stdout.on("data", (chunk) => {
@@ -216,7 +216,7 @@ function ensureChildWithinRoot(rootPath, childPath) {
     return;
   }
 
-  throw new Error(`La carpeta hija queda fuera del root permitido: ${childPath}`);
+  throw new Error(`Child directory is outside the allowed root: ${childPath}`);
 }
 
 function trimTrailingSeparator(input) {

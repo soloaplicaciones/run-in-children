@@ -29,7 +29,7 @@ function parseArgs(argv) {
       const raw = args.shift();
       const parsed = Number.parseInt(raw ?? "", 10);
       if (!Number.isFinite(parsed) || parsed <= 0) {
-        throw new Error("--timeout requiere un número positivo en milisegundos");
+        throw new Error("--timeout requires a positive number in milliseconds");
       }
       timeoutMs = parsed;
       continue;
@@ -38,7 +38,7 @@ function parseArgs(argv) {
     if (current === "--shell") {
       shell = args.shift();
       if (!shell) {
-        throw new Error("--shell requiere una ruta o nombre de shell");
+        throw new Error("--shell requires a shell path or shell name");
       }
       continue;
     }
@@ -47,7 +47,7 @@ function parseArgs(argv) {
   }
 
   if (positional.length < 2) {
-    throw new Error("Uso: run-in-children <basePath> <command> [--parallel] [--timeout ms] [--shell shell]");
+    throw new Error("Usage: run-in-children <basePath> <command> [--parallel] [--timeout ms] [--shell shell]");
   }
 
   const [basePath, ...commandParts] = positional;
@@ -61,7 +61,7 @@ function parseArgs(argv) {
 }
 
 main().catch((error) => {
-  const message = error instanceof Error ? error.message : "No se pudo ejecutar run-in-children";
+  const message = error instanceof Error ? error.message : "Failed to run run-in-children";
   process.stderr.write(`${message}\n`);
   process.exitCode = 1;
 });

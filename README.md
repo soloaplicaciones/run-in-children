@@ -1,69 +1,69 @@
 # `run-in-children`
 
-Ejecutor pequeño para recorrer las carpetas hijas de una carpeta base y ejecutar el mismo comando dentro de cada una, devolviendo una salida JSON agregada.
+A small utility that walks the child directories of a base folder, runs the same command inside each one, and returns aggregated JSON output.
 
-Repositorio: [soloaplicaciones/run-in-children](https://github.com/soloaplicaciones/run-in-children)
+Repository: [soloaplicaciones/run-in-children](https://github.com/soloaplicaciones/run-in-children)
 
-## Qué hace
+## What it does
 
-- normaliza la carpeta base
-- lista carpetas hijas visibles
-- valida que cada hija permanezca dentro del root base
-- ejecuta un comando con `cwd` dentro de cada carpeta hija
-- captura `stdout`, `stderr`, `exitCode` y `durationMs`
-- puede correr en serie o en paralelo
+- normalizes the base path
+- lists visible child directories
+- validates that each child stays inside the base root
+- runs a command with `cwd` set to each child directory
+- captures `stdout`, `stderr`, `exitCode`, and `durationMs`
+- can run in series or in parallel
 
-## Instalación como dependencia de desarrollo
+## Install as a dev dependency
 
-### Desde npm
+### From npm
 
 ```bash
 npm install -D run-in-children
 ```
 
-### Desde una ruta local
+### From a local path
 
 ```bash
-npm install -D /ruta/a/run-in-children
+npm install -D /path/to/run-in-children
 ```
 
-Si tu proyecto vive junto a este:
+If your project lives next to this one:
 
 ```bash
 npm install -D ../run-in-children
 ```
 
-## Uso por CLI
+## CLI usage
 
 ```bash
 run-in-children ./refs "pwd"
 ```
 
-En Windows, por ejemplo:
+On Windows, for example:
 
 ```bash
 run-in-children .\refs "Write-Output $PWD.Path"
 ```
 
-Modo paralelo:
+Parallel mode:
 
 ```bash
 run-in-children ./refs "pwd" --parallel
 ```
 
-Con timeout personalizado:
+With a custom timeout:
 
 ```bash
 run-in-children ./refs "pwd" --timeout 10000
 ```
 
-Con shell explícita:
+With an explicit shell:
 
 ```bash
 run-in-children ./refs "pwd" --shell /bin/bash
 ```
 
-## Uso programático
+## Programmatic usage
 
 ```js
 import { runInChildren } from "run-in-children";
@@ -77,19 +77,19 @@ const result = await runInChildren({
 console.log(result);
 ```
 
-## Formato de salida
+## Output format
 
 ```json
 {
-  "basePath": "/ruta/base",
+  "basePath": "/base/path",
   "command": "pwd",
   "parallel": false,
   "total": 2,
   "results": [
     {
       "name": "repo-a",
-      "path": "/ruta/base/repo-a",
-      "stdout": "/ruta/base/repo-a\n",
+      "path": "/base/path/repo-a",
+      "stdout": "/base/path/repo-a\n",
       "stderr": "",
       "exitCode": 0,
       "durationMs": 12
@@ -98,33 +98,33 @@ console.log(result);
 }
 ```
 
-## Límites actuales
+## Current limits
 
-Esta primera versión no incluye todavía:
+This first version does not include yet:
 
-- filtros por nombre de carpeta
-- límite de concurrencia configurable
-- sesiones persistentes
-- paginación de salida
-- lógica específica de Git
+- directory name filters
+- configurable concurrency limits
+- persistent sessions
+- paginated output
+- Git-specific logic
 
-## Publicación en npm
+## Publishing to npm
 
-Antes de publicar, conviene comprobar el paquete localmente:
+Before publishing, it is a good idea to verify the package locally:
 
 ```bash
 npm run smoke
 npm run pack:dry
 ```
 
-Después:
+Then:
 
 ```bash
 npm login
 npm publish
 ```
 
-Si más adelante añades repositorio público, conviene completar en `package.json` los campos:
+If you later add a public repository, these `package.json` fields are worth keeping complete:
 
 - `repository`
 - `homepage`

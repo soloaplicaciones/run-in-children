@@ -1,7 +1,7 @@
 {
   "name": "run-in-children",
   "version": "0.1.0",
-  "description": "Ejecuta un comando dentro de cada carpeta hija de una carpeta base y devuelve resultados estructurados.",
+  "description": "Runs a command inside each child directory of a base folder and returns structured results.",
   "type": "module",
   "main": "./index.js",
   "exports": {

@@ -1,0 +1,46 @@
+{
+  "name": "run-in-children",
+  "version": "0.1.0",
+  "description": "Ejecuta un comando dentro de cada carpeta hija de una carpeta base y devuelve resultados estructurados.",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "types": "./index.d.ts",
+  "bin": {
+    "run-in-children": "./cli.js"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "cli.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "smoke": "node ./cli.js . pwd",
+    "pack:dry": "npm pack --dry-run"
+  },
+  "keywords": [
+    "cli",
+    "directories",
+    "folders",
+    "runner",
+    "shell",
+    "automation"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soloaplicaciones/run-in-children.git"
+  },
+  "homepage": "https://github.com/soloaplicaciones/run-in-children#readme",
+  "bugs": {
+    "url": "https://github.com/soloaplicaciones/run-in-children/issues"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
+}

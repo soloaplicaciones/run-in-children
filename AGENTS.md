@@ -1,33 +1,33 @@
-# `run-in-children` Agent Instructions
+# Instrucciones para Agentes de `run-in-children`
 
-## Repository Structure
+## Estructura del Repositorio
 
-Single ESM package with CLI and programmatic API.
-- `index.js` - main module exports (core logic)
-- `cli.js` - CLI entry point using `runInChildren`
-- `index.d.ts` - TypeScript definitions
+Paquete único ESM con CLI y API programática.
+- `index.js` - exportaciones del módulo principal (lógica central)
+- `cli.js` - punto de entrada CLI usando `runInChildren`
+- `index.d.ts` - definiciones TypeScript
 
-## Commands
+## Comandos
 
 ```bash
-# Verify CLI works
+# Verificar que la CLI funciona
 npm run smoke
 
-# Dry-run publish check
+# Verificación en seco de publicación
 npm run pack:dry
 
-# Run command in child directories
+# Ejecutar comando en directorios hijos
 run-in-children ./refs "pwd"
 ```
 
-## Key Constraints
+## Restricciones Clave
 
-- ESM only (`"type": "module"`)
-- CLI shebang: `#!/usr/bin/env node`
-- No tests, linting, or CI configured
-- TypeScript definitions are manual (index.d.ts, not generated)
+- Solo ESM (`"type": "module"`)
+- Shebang CLI: `#!/usr/bin/env node`
+- Sin pruebas, linting o CI configurados
+- Definiciones TypeScript son manuales (index.d.ts, no generadas)
 
-## API Usage
+## Uso de la API
 
 ```js
 import { runInChildren } from "run-in-children";
@@ -38,10 +38,10 @@ const result = await runInChildren({
 });
 ```
 
-## Publish Flow
+## Flujo de Publicación
 
-Before publishing: `npm run smoke` → `npm run pack:dry`
+Antes de publicar: `npm run smoke` → `npm run pack:dry`
 
-Then: `npm login` → `npm publish`
+Luego: `npm login` → `npm publish`
 
-Keep `package.json` fields complete if adding public repo: `repository`, `homepage`, `bugs`, `author`
+Mantén completos los campos de `package.json` si agregas repositorio público: `repository`, `homepage`, `bugs`, `author`
